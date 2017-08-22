@@ -43,14 +43,23 @@ app.config(function($routeProvider) {
 	
 	})
 	
+	.when('/getblog/:bid',{
+		templateUrl:'blog/blogdisplay.html',
+		controller:'BlogController'
+	
+	})
+	
 	.otherwise({
 		templateUrl:'views/home.html'
 	})
 	
 })
-app.run(function(AuthService,$rootScope,$cookieStore,$location) {
+app.run(function(AuthService,BlogService,$rootScope,$cookieStore,$location) {
 	if($rootScope.currentUser==undefined){
 		$rootScope.currentUser = $cookieStore.get("currentUser")
+	}
+	if($rootScope.len==undefined){
+		$rootScope.len=$cookieStore.get("len")
 	}
 		$rootScope.logout=function(){
 			AuthService.logout().then(function(response) {

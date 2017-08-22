@@ -22,6 +22,7 @@ app.controller('AuthController',function(AuthService,$scope,$rootScope,$location
 			console.log(response.data)
 			$rootScope.currentUser=response.data
 			$cookieStore.put("currentUser",response.data)
+			Materialize.toast('Logged In Successfully..!',3000);
 			$location.path('/home')
 		},function(response){
 			$scope.error = response.data

@@ -2,9 +2,14 @@
  * 
  */
 
-app.controller('BlogController',function(BlogService,$scope,$location){
+app.controller('BlogController',function(BlogService,$scope,$location,$route,$rootScope,$cookieStore){
 	
 	BlogService.getBlogsWaitingForApproval().then(function(response){
+		if(response.data.length==0){
+			$scope.mess="No New Blogs for Approval...!"
+		}
+		$rootScope.len=response.data.length;
+		$cookieStore.put("len",response.data.length)
 		$scope.blogsWaitingForApproval = response.data;
 	},function(response){
 		if(response.status==401){
@@ -22,10 +27,22 @@ app.controller('BlogController',function(BlogService,$scope,$location){
 		}
 	})
 	
+	
+	$scope.changeblogStatus=function(id){
+	BlogService.changeblogStatus(id).then(function(response){
+		$scope.changeblogStatus = response.data;
+		Materialize.toast('Blog Approved..!',3000);
+		$route.reload();
+	},function(response){
+		$scope.error=response.data
+		$location.path('/home')
+	})
+	}
+	
 	$scope.addBlog=function(){
 		BlogService.addBlog($scope.blog).then(function(response){
 			console.log(response.status)
-			alert("Blog submitted Successfully...!Waiting for approval")
+			Materialize.toast('Blog Created..!Waiting for approval', 3000);
 			$location.path("/getallblogs")
 		},function(response){
 			if(response.status==401){
@@ -38,6 +55,18 @@ app.controller('BlogController',function(BlogService,$scope,$location){
 				$location.path('/addblog')
 			}
 			$location.path('/home')
+		})
+	}
+	
+	$scope.getBlog=function(id){
+		BlogService.getBlog(id).then(function(response){
+			$scope.getBlog=response.data;
+			$location.path('/viewBlog')
+		},function(response){
+			if(response.status==401){
+				$scope.error=response.data
+				$location.path('/home')
+			}
 		})
 	}
 })

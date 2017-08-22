@@ -43,7 +43,7 @@ html, body {
 					<li><a class="dropdown-button " href="#" data-activates="dropdown" ng-show="currentUser.firstname">Job</a></li>
 					<ul id="dropdown1" class="dropdown-content" >
 						<li><a class="nav-link " href="#!addblog"  ng-show="currentUser.firstname" >ADD Blog</a>
-						<li><a class="nav-link " href="#!getallBlogs" ng-show="currentUser.firstname">All Blogs</a></li>
+						<li ng-show="currentUser.firstname"><a class="nav-link" href="#!getallBlogs" >All Blogs<span class="new badge">{{len}}</span></a></li>
 					</ul>
 					<li><a class="dropdown-button " href="#" data-activates="dropdown1" ng-show="currentUser.firstname">Blog</a></li>
 					<!-- <li><a class="nav-link " href="#!addblog" ng-show="currentUser.firstname">ADD Blog</a> -->

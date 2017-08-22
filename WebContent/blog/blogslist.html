@@ -1,5 +1,5 @@
 <div ng-show="currentUser.role=='ADMIN'">
-List of Blogs Waiting For Approval
+<h4>List of Blogs Waiting For Approval</h4>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -8,40 +8,39 @@ List of Blogs Waiting For Approval
 	</thead>
 	<tbody>
 		<tr ng-repeat="blog in blogsWaitingForApproval">
-			<td>{{blog.blogTitle}}</td>
+			<td><a href="#!getblog/{{blog.bid}}">{{blog.blogTitle}}</a></td>
 			<td>{{blog.postedBy.username}}</td>
 			<td>{{blog.postedOn | date:'dd/MM/yyyy'}}</td>
 			<td>
 				 <div class="switch">
                  	<label>
                   		Disable
-                  		<input type="checkbox" ng-model="blog.approved">
+                  		<input type="checkbox" ng-model="blog.approved" ng-change="changeblogStatus(blog.bid)">
                  		<span class="lever"></span>
                   		Active
                   	</label>
                 </div>
 			</td>
 		</tr>
+		<tr ng-show="mess!=null">
+			<td colspan=4 style="color:#ff6666;"><h3>{{mess}}</h3></td>
+		</tr>
 	</tbody>
 </table>
-</div>
 
-<div>
-List of Blogs Approved
-	<div class="container">
-     	<div class="col s3" ng-repeat="blog in blogsApproved">
-     		<div class="card">
-   				 <div class="card-content text-center">
-     				 <h3 class="card-title activator grey-text text-darken-4">{{blog.blogTitle}}</h3>
-     				 <h4>{{blog.postedBy.username}}</h4>
-     				 	
-    			 </div>
-    			<div class="card-reveal">
-      				<h3 class="card-title grey-text text-darken-4">{{blog.blogTitle}}<i class="material-icons right">close</i></h3>
-      					<h4>{{blog.postedBy.username}}</h4>
-      					<button>View</button>
-    			</div>
-  </div>
-     	</div>   
-	</div>
+<h4>List of Blogs Approved</h4>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Title</th><th>Author</th><th>Posted On</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="blog in blogsApproved">
+			<td><a href="#!getblog/{{blog.bid}}">{{blog.blogTitle}}</a></td>
+			<td>{{blog.postedBy.username}}</td>
+			<td>{{blog.postedOn | date:'dd/MM/yyyy'}}</td>
+		</tr>
+	</tbody>
+</table>
 </div>
