@@ -19,8 +19,8 @@ app.factory('BlogService',function($http){
 		return $http.get(BASE_URL+"/getblogs/"+1)
 	}
 	
-	blogService.getBlog=function(id){
-		return $http.get(BASE_URL+"/getblog/"+id)
+	blogService.getBlog=function(bid){
+		return $http.get(BASE_URL+"/getblog/"+bid)
 	}
 	
 	blogService.changeblogStatus=function(id){

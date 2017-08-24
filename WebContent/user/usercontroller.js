@@ -1,7 +1,7 @@
 /**
  * 
  */
-app.controller('UserController',function(UserService,$scope,$location,$rootScope){
+app.controller('UserController',function(UserService,$scope,$location,$rootScope,$cookieStore){
 	$scope.user={}
 	if($rootScope.currentUser!=undefined){
 		UserService.getUser().then(function(response){

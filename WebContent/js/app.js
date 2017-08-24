@@ -37,15 +37,26 @@ app.config(function($routeProvider) {
 		controller:'BlogController'
 	
 	})
-	.when('/getallBlogs',{
+	.when('/request/getallBlogs',{
 		templateUrl:'blog/blogslist.html',
+		controller:'ReqController'
+	
+	})
+	
+	.when('/viewblogs',{
+		templateUrl:'blog/viewblogs.html',
 		controller:'BlogController'
 	
 	})
 	
-	.when('/getblog/:bid',{
+	.when('/viewblog',{
 		templateUrl:'blog/blogdisplay.html',
 		controller:'BlogController'
+	})
+	
+	.when('/request/useracc',{
+		templateUrl:'requests/UserReq.html',
+		controller:'ReqController'
 	
 	})
 	

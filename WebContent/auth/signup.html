@@ -1,6 +1,9 @@
 <link href="css/style.css" rel="stylesheet">
-<div ng-if="error.message !=null" class="text-center alert alert-danger alert-dismissable rounded" id="alert_box">
-	<b>{{error.message}}</b>
+<div ng-if="message !=null" class="text-center animated fadeOut" id="alert_box_success" >
+		<p>{{message}}</p>
+</div>
+<div ng-if="error.message !=null" class="text-center animated fadeOut" id="alert_danger">
+	<p>{{error.message}}</p>
 </div>
 <div class="card hoverable">
 	<form class="form-horizontal">
