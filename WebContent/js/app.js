@@ -65,7 +65,7 @@ app.config(function($routeProvider) {
 	})
 	
 })
-app.run(function(AuthService,BlogService,$rootScope,$cookieStore,$location) {
+app.run(function(AuthService,$rootScope,$cookieStore,$location) {
 	if($rootScope.currentUser==undefined){
 		$rootScope.currentUser = $cookieStore.get("currentUser")
 	}
