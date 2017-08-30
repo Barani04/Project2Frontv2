@@ -76,6 +76,9 @@ app.run(function(AuthService,$rootScope,$cookieStore,$location) {
 	if($rootScope.vb==undefined){
 		$rootScope.vb=$cookieStore.get("vb")
 	}
+	if($rootScope.blogcomments==undefined){
+		$rootScope.blogcomments=$cookieStore.get("blogcomments")
+	}
 		$rootScope.logout=function(){
 			AuthService.logout().then(function(response) {
 			$rootScope.message='Logged Out Successfully'
