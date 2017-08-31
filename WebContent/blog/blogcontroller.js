@@ -38,7 +38,6 @@ app.controller('BlogController',function(BlogService,$scope,$location,$route,$ro
 		BlogService.getBlog(blog.bid).then(function(response){
 			$rootScope.vb=response.data
 			console.log($rootScope.vb)
-			$scope.getallblogcomments()
 			$cookieStore.put("vb",response.data)
 			$location.path('/viewblog')
 		},function(response){
@@ -54,26 +53,23 @@ app.controller('BlogController',function(BlogService,$scope,$location,$route,$ro
 		$scope.blogComment.blog=$rootScope.vb
 		console.log($scope.blogComment)
 		BlogService.addComment($scope.blogComment).then(function(response){
-		
+			$scope.blogComment.commentText=''
 			console.log(response.data)
-			$route.reload();
+			getBlogComments()
 		},function(response){
 			if(response.status==401){
-				$scope.error=response.data
 				$location.path('/viewblog')
 			}
 		})
 		
 	}
 	
-	$scope.getallblogcomments=function(){
-		
-		BlogService.getallblogcomments($rootScope.vb.bid).then(function(response){
+	function getBlogComments(){	
+		BlogService.getBlogComments($rootScope.vb.bid).then(function(response){
 			if(response.data == null){
-				$rootScope.note="No Comments Yet...!"
+				$scopecope.note="No Comments Yet...!"
 			}
-			$rootScope.blogcomments = response.data
-			$cookieStore.put("blogcomments",response.data)
+			$scope.blogcomments = response.data
 		},function(response){
 			if(response.status==401){
 				$scope.error=response.data
@@ -81,6 +77,7 @@ app.controller('BlogController',function(BlogService,$scope,$location,$route,$ro
 			}
 		})
 	}
+	getBlogComments()
 	
 	
 })
